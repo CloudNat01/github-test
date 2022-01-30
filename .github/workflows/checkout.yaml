@@ -1,0 +1,8 @@
+name: git checkout
+
+on: push
+
+jobs:
+  init:
+     run-on: ubuntu-latest
+     uses: echo 'hello world'
