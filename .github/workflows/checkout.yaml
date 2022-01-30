@@ -1,8 +1,18 @@
-name: git checkout
-
-on: push
-
+name: "Test"
+on:
+  push:
+  
 jobs:
-  init:
-     run-on: ubuntu-latest
-     uses: echo 'hello world'
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - uses: workflow/nix-shell-action@v1
+      with:
+        packages: hello,docker
+        script: |
+          hello
+          docker --help
